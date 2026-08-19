@@ -621,21 +621,25 @@ body.daikyo-mode::before {
     );
 
   animation:
-    daikyo-dark 1.8s ease-out forwards;
+    daikyo-dark 3s ease-out forwards;
 }
 
 
 @keyframes daikyo-dark {
 
-  0% {
+0% {
     opacity: 0;
   }
 
-  20% {
+  15% {
     opacity: 0.9;
   }
 
-  45% {
+  25% {
+    opacity: 1;
+  }
+
+  75% {
     opacity: 1;
   }
 
