@@ -553,8 +553,9 @@ button:hover {
   z-index: 10;
 
   text-shadow:
-    0 0 6px #fff3a0,
-    0 0 12px #ffd700;
+    0 0 6px #ffd700;
+
+  will-change: transform, opacity;
 
   animation:
     sparkle-burst 1.6s ease-out forwards;
