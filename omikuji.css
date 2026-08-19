@@ -173,12 +173,53 @@ button:hover {
   overflow: hidden;
 }
 
+/* 紙の繊維 */
+.fortune-paper::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image:
+    repeating-linear-gradient(
+      8deg,
+      transparent 0,
+      transparent 7px,
+      rgba(120, 90, 50, 0.025) 8px,
+      transparent 9px
+    ),
+    repeating-linear-gradient(
+      98deg,
+      transparent 0,
+      transparent 11px,
+      rgba(120, 90, 50, 0.018) 12px,
+      transparent 13px
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.fortune-paper > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* 紙の上に「おみくじ」と表示 */
 .fortune-paper::before {
   content: 'おみくじ';
 
   display: block;
+
+  position: relative;
+  z-index: 1;
 
   margin-bottom: 18px;
 
