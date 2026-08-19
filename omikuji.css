@@ -124,14 +124,55 @@ button:hover {
   font-size: 14px;
 }
 
-
 #result-area {
+  position: relative;
   margin-top: 25px;
 }
 
 
+/* おみくじの紙 */
+.fortune-paper {
+  position: relative;
+
+  max-width: 380px;
+  margin: 0 auto;
+
+  padding: 28px 28px 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffef8,
+      #fff9e8
+    );
+
+  border: 1px solid #e5d5b5;
+  border-top: 5px solid #c62828;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* 紙の上に「おみくじ」と表示 */
+.fortune-paper::before {
+  content: 'おみくじ';
+
+  display: block;
+
+  margin-bottom: 18px;
+
+  color: #c62828;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  letter-spacing: 0.5em;
+}
+
+
 .result-title {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 
   font-size: 18px;
 }
@@ -144,16 +185,19 @@ button:hover {
 
   font-size: 52px;
   font-weight: bold;
+
+  letter-spacing: 0.15em;
 }
 
 
 .fortune-comment {
-  padding: 20px;
+  margin: 0;
 
-  background-color: #fff8f0;
+  padding: 18px 0 0;
 
-  border-top: 2px solid #c62828;
-  border-bottom: 2px solid #c62828;
+  background-color: transparent;
+
+  border-top: 1px solid #d8c9ad;
 
   font-size: 18px;
   line-height: 1.8;
@@ -232,6 +276,51 @@ button:hover {
   animation:
     box-appear 0.25s ease-out,
     omikuji-shake 0.9s 0.25s ease-in-out;
+}
+
+/* 凶・大凶だけ最後にガタッとする */
+#omikuji-animation.active.bad-luck .omikuji-image {
+  animation:
+    box-appear 0.25s ease-out,
+    omikuji-shake 0.9s 0.25s ease-in-out,
+    bad-luck-jolt 0.3s 1.15s ease-in-out;
+}
+
+
+@keyframes bad-luck-jolt {
+
+  0% {
+    transform:
+      translateX(-50%)
+      rotate(0deg);
+  }
+
+  25% {
+    transform:
+      translateX(-50%)
+      translate(-5px, 3px)
+      rotate(-3deg);
+  }
+
+  50% {
+    transform:
+      translateX(-50%)
+      translate(5px, 2px)
+      rotate(3deg);
+  }
+
+  75% {
+    transform:
+      translateX(-50%)
+      translate(-3px, 1px)
+      rotate(-2deg);
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      rotate(0deg);
+  }
 }
 
 
@@ -445,6 +534,99 @@ button:hover {
     transform:
       translateY(0)
       scale(1);
+  }
+}
+
+/* ==============================
+   大吉のキラキラ
+============================== */
+
+.sparkle {
+  position: absolute;
+
+  color: #d4af37;
+
+  font-size: 26px;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  z-index: 5;
+
+  animation:
+    sparkle-pop 1.2s ease-out forwards;
+}
+
+
+.sparkle-1 {
+  left: 3%;
+  top: 5%;
+}
+
+.sparkle-2 {
+  right: 3%;
+  top: 10%;
+  animation-delay: 0.1s;
+}
+
+.sparkle-3 {
+  left: 8%;
+  top: 45%;
+  animation-delay: 0.2s;
+}
+
+.sparkle-4 {
+  right: 7%;
+  top: 50%;
+  animation-delay: 0.3s;
+}
+
+.sparkle-5 {
+  left: 18%;
+  bottom: 5%;
+  animation-delay: 0.15s;
+}
+
+.sparkle-6 {
+  right: 17%;
+  bottom: 3%;
+  animation-delay: 0.25s;
+}
+
+.sparkle-7 {
+  left: 45%;
+  top: -15px;
+  animation-delay: 0.35s;
+}
+
+.sparkle-8 {
+  right: 20%;
+  top: 25%;
+  animation-delay: 0.45s;
+}
+
+
+@keyframes sparkle-pop {
+
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1.4) rotate(90deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1) rotate(150deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(220deg);
   }
 }
 
