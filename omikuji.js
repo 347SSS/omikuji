@@ -4,6 +4,7 @@ const userNameInput = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
 const resultDivision = document.getElementById('result-area');
 const tweetDivision = document.getElementById('tweet-area');
+const omikujiAnimation = document.getElementById('omikuji-animation');
 const errorMessage = document.getElementById('error-message');
 const todayParagraph = document.getElementById('today');
 
@@ -68,7 +69,6 @@ assessmentButton.addEventListener(
 
     // 名前が入力されていない場合
     if (userName.length === 0) {
-
       errorMessage.innerText =
         '名前を入力してください。';
 
@@ -78,107 +78,140 @@ assessmentButton.addEventListener(
     // エラーメッセージを消す
     errorMessage.innerText = '';
 
-
-    // おみくじを引く
-    const fortune =
-      assessment(userName);
-
-
-    // 前の結果を消す
+    // 前のおみくじ結果を消す
     resultDivision.innerText = '';
-
-
-    // 名前の表示
-    const resultTitle =
-      document.createElement('p');
-
-    resultTitle.className =
-      'result-title';
-
-    resultTitle.innerText =
-      userName +
-      'さんの今日の運勢は';
-
-    resultDivision.appendChild(
-      resultTitle
-    );
-
-    // 運勢の表示
-    const fortuneName =
-      document.createElement('div');
-
-    fortuneName.className =
-      'fortune-name';
-
-    fortuneName.innerText =
-      fortune.name;
-
-    resultDivision.appendChild(
-      fortuneName
-    );
-
-
-    // コメントの表示
-    const fortuneComment =
-      document.createElement('p');
-
-    fortuneComment.className =
-      'fortune-comment';
-
-    fortuneComment.innerText =
-      fortune.comment;
-
-    resultDivision.appendChild(
-      fortuneComment
-    );
-
-    // X投稿エリアを空にする
     tweetDivision.innerText = '';
 
+    // 前回の結果表示アニメーションを消す
+    resultDivision.classList.remove('result-show');
 
-    // X投稿リンクを作成
-    const anchor =
-      document.createElement('a');
+    // おみくじ箱を表示する
+    omikujiAnimation.classList.add('active');
+
+    // 揺れアニメーションを最初から再生する
+    omikujiAnimation.classList.remove('shake');
+
+    void omikujiAnimation.offsetWidth;
+
+    omikujiAnimation.classList.add('shake');
+
+    // アニメーション中はボタンを押せなくする
+    assessmentButton.disabled = true;
 
 
-    const tweetText =
-      '今日のおみくじは「' +
-      fortune.name +
-      '」でした！\n' +
-      fortune.comment;
+    // 0.9秒後に結果を表示する
+    setTimeout(
+      () => {
+
+        // おみくじ箱を消す
+        omikujiAnimation.classList.remove(
+          'active',
+          'shake'
+        );
+
+        // おみくじを引く
+        const fortune = assessment(userName);
 
 
-    const hrefValue =
-      'https://twitter.com/intent/tweet?text=' +
-      encodeURIComponent(tweetText) +
-      '&hashtags=' +
-      encodeURIComponent('今日のおみくじ');
+        // 名前の表示
+        const resultTitle =
+          document.createElement('p');
 
-    anchor.setAttribute(
-      'href',
-      hrefValue
+        resultTitle.className =
+          'result-title';
+
+        resultTitle.innerText =
+          userName +
+          'さんの今日の運勢は';
+
+        resultDivision.appendChild(
+          resultTitle
+        );
+
+
+        // 運勢の表示
+        const fortuneName =
+          document.createElement('div');
+
+        fortuneName.className =
+          'fortune-name';
+
+        fortuneName.innerText =
+          fortune.name;
+
+        resultDivision.appendChild(
+          fortuneName
+        );
+
+
+        // コメントの表示
+        const fortuneComment =
+          document.createElement('p');
+
+        fortuneComment.className =
+          'fortune-comment';
+
+        fortuneComment.innerText =
+          fortune.comment;
+
+        resultDivision.appendChild(
+          fortuneComment
+        );
+
+
+        // 結果をふわっと表示する
+        resultDivision.classList.add(
+          'result-show'
+        );
+
+
+        // X投稿リンクを作成
+        const anchor =
+          document.createElement('a');
+
+        const tweetText =
+          '今日のおみくじは「' +
+          fortune.name +
+          '」でした！\n' +
+          fortune.comment;
+
+        const hrefValue =
+          'https://twitter.com/intent/tweet?text=' +
+          encodeURIComponent(tweetText) +
+          '&hashtags=' +
+          encodeURIComponent('今日のおみくじ');
+
+        anchor.setAttribute(
+          'href',
+          hrefValue
+        );
+
+        anchor.setAttribute(
+          'target',
+          '_blank'
+        );
+
+        anchor.setAttribute(
+          'rel',
+          'noopener noreferrer'
+        );
+
+        anchor.innerText =
+          'Xで結果を投稿する';
+
+        tweetDivision.appendChild(
+          anchor
+        );
+
+
+        // 再びボタンを押せるようにする
+        assessmentButton.disabled = false;
+
+      },
+      900
     );
 
-    anchor.setAttribute(
-      'target',
-      '_blank'
-    );
-
-    anchor.setAttribute(
-      'rel',
-      'noopener noreferrer'
-    );
-
-
-    anchor.innerText =
-      'Xで結果を投稿する';
-
-
-    tweetDivision.appendChild(
-      anchor
-    );
-
-    }
+  }
 );
 
 
@@ -242,9 +275,3 @@ function assessment(userName) {
   // おみくじの結果を返す
   return fortunes[index];
 }
-
-    
-
-    
-   
- 
