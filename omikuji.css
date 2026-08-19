@@ -538,7 +538,7 @@ button:hover {
 }
 
 /* ==============================
-   大吉のキラキラ
+   大吉の豪華なキラキラ
 ============================== */
 
 .sparkle {
@@ -546,87 +546,51 @@ button:hover {
 
   color: #d4af37;
 
-  font-size: 26px;
-
   pointer-events: none;
 
   opacity: 0;
 
-  z-index: 5;
+  z-index: 10;
+
+  text-shadow:
+    0 0 6px #fff3a0,
+    0 0 12px #ffd700;
 
   animation:
-    sparkle-pop 1.2s ease-out forwards;
+    sparkle-burst 1.6s ease-out forwards;
 }
 
 
-.sparkle-1 {
-  left: 3%;
-  top: 5%;
-}
-
-.sparkle-2 {
-  right: 3%;
-  top: 10%;
-  animation-delay: 0.1s;
-}
-
-.sparkle-3 {
-  left: 8%;
-  top: 45%;
-  animation-delay: 0.2s;
-}
-
-.sparkle-4 {
-  right: 7%;
-  top: 50%;
-  animation-delay: 0.3s;
-}
-
-.sparkle-5 {
-  left: 18%;
-  bottom: 5%;
-  animation-delay: 0.15s;
-}
-
-.sparkle-6 {
-  right: 17%;
-  bottom: 3%;
-  animation-delay: 0.25s;
-}
-
-.sparkle-7 {
-  left: 45%;
-  top: -15px;
-  animation-delay: 0.35s;
-}
-
-.sparkle-8 {
-  right: 20%;
-  top: 25%;
-  animation-delay: 0.45s;
-}
-
-
-@keyframes sparkle-pop {
+@keyframes sparkle-burst {
 
   0% {
     opacity: 0;
-    transform: scale(0) rotate(0deg);
+    transform:
+      scale(0)
+      rotate(0deg);
   }
 
-  40% {
+  25% {
     opacity: 1;
-    transform: scale(1.4) rotate(90deg);
+    transform:
+      scale(1.8)
+      rotate(90deg);
   }
 
-  70% {
+  60% {
     opacity: 1;
-    transform: scale(1) rotate(150deg);
+    transform:
+      translateY(-15px)
+      scale(1.2)
+      rotate(180deg);
   }
 
   100% {
     opacity: 0;
-    transform: scale(0.6) rotate(220deg);
+    transform:
+      translateY(-35px)
+      scale(0.5)
+      rotate(300deg);
   }
 }
 
