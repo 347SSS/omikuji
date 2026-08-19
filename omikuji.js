@@ -297,7 +297,7 @@ assessmentButton.addEventListener(
   }
 );
 
-// 大吉のキラキラを作る関数
+// 大吉の星のキラキラ
 function createSparkles() {
 
   const symbols = [
@@ -307,15 +307,19 @@ function createSparkles() {
     '✶'
   ];
 
-  // 24個のキラキラを作る
-  for (let i = 0; i < 24; i++) {
+  // 星をまとめて入れておく箱
+  const fragment =
+    document.createDocumentFragment();
+
+
+  // 18個のキラキラを作る
+  for (let i = 0; i < 18; i++) {
 
     const sparkle =
       document.createElement('span');
 
     sparkle.className = 'sparkle';
 
-    // 星の形をランダムにする
     sparkle.innerText =
       symbols[
         Math.floor(
@@ -323,33 +327,36 @@ function createSparkles() {
         )
       ];
 
-    // 横の位置をランダムにする
     sparkle.style.left =
       (-10 + Math.random() * 120) + '%';
 
-    // 縦の位置をランダムにする
     sparkle.style.top =
       (-10 + Math.random() * 110) + '%';
 
-    // 星の大きさをランダムにする
     sparkle.style.fontSize =
-      (24 + Math.random() * 32) + 'px';
+      (28 + Math.random() * 30) + 'px';
 
-    // 出るタイミングを少しずつ変える
     sparkle.style.animationDelay =
-      (Math.random() * 0.5) + 's';
+      (Math.random() * 0.4) + 's';
 
-    // アニメーション時間も少し変える
     sparkle.style.animationDuration =
-      (1.2 + Math.random() * 0.8) + 's';
+      (1.2 + Math.random() * 0.6) + 's';
 
-    resultDivision.appendChild(
+    // すぐ画面には追加せず、
+    // fragmentに入れておく
+    fragment.appendChild(
       sparkle
     );
-
   }
 
+
+  // 最後に一度だけまとめて追加
+  resultDivision.appendChild(
+    fragment
+  );
+
 }
+
 
 // 大凶の暗い演出を行う関数
 function playDaikyoEffect() {
