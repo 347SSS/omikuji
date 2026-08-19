@@ -332,22 +332,33 @@ button:hover {
   position: absolute;
 
   width: 10px;
-  height: 100px;
+  height: 85px;
 
-  left: 50%;
-  bottom: 120px;
+  /* おみくじ箱の穴の位置に合わせる */
+  left: calc(50% + 11px);
+  bottom: 176px;
 
-  background-color: #e4b56a;
+  background:
+    linear-gradient(
+      90deg,
+      #c98b3c,
+      #f2c978,
+      #d99c48
+    );
 
   border-radius: 4px;
 
+  /* 棒の根元を基準に伸びる */
   transform:
     translateX(-50%)
-    translateY(80px);
+    scaleY(0);
+
+  transform-origin: bottom center;
 
   opacity: 0;
 
-  z-index: 1;
+  /* 箱より手前に表示 */
+  z-index: 3;
 }
 
 
@@ -364,17 +375,17 @@ button:hover {
 
     transform:
       translateX(-50%)
-      translateY(80px);
+      scaleY(0);
   }
 
-  50% {
+  20% {
     opacity: 1;
   }
 
   80% {
     transform:
       translateX(-50%)
-      translateY(-15px);
+      scaleY(1.1);
   }
 
   100% {
@@ -382,7 +393,7 @@ button:hover {
 
     transform:
       translateX(-50%)
-      translateY(0);
+      scaleY(1);
   }
 }
 
