@@ -197,6 +197,18 @@ button:hover {
     inset 12px 0 18px -18px rgba(120, 90, 50, 0.10),
     inset -12px 0 18px -18px rgba(120, 90, 50, 0.08);
 
+  clip-path: polygon(
+  0.5% 0,
+  99.5% 0.3%,
+  100% 99.5%,
+  0.4% 100%,
+  0 50%
+);
+
+overflow: hidden;
+
+transform: rotate(-0.4deg);
+
   overflow: hidden;
 
   /* 少しだけ傾けて自然に */
