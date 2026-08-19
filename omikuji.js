@@ -4,18 +4,31 @@ const userNameInput = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
 const resultDivision = document.getElementById('result-area');
 const tweetDivision = document.getElementById('tweet-area');
+const errorMessage = document.getElementById('error-message');
+const todayParagraph = document.getElementById('today');
 
+// 今日の日付を表示
+const today = new Date();
+
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const date = today.getDate();
+
+todayParagraph.innerText =
+  year + '年' +
+  month + '月' +
+  date + '日';
 
 // おみくじの結果
 const fortunes = [
   {
     name: '大吉',
-    comment: '最高の運勢です！新しいことに挑戦すると良い一日になりそうです。'
+    comment: '最高の運勢です！！新しいことに挑戦すると良い一日になりそう！'
   },
 
   {
     name: '吉',
-    comment: '良い一日になりそうです。自信を持って行動してみましょう。'
+    comment: '良い一日になりそうです。自信を持って行動してみましょう！'
   },
 
   {
@@ -25,7 +38,7 @@ const fortunes = [
 
   {
     name: '小吉',
-    comment: '小さな幸せが見つかりそうです。身近な出来事に目を向けてみましょう。'
+    comment: '小さな幸せが見つかりそうな予感。身近な出来事に目を向けてみましょう。'
   },
 
   {
@@ -35,12 +48,12 @@ const fortunes = [
 
   {
     name: '凶',
-    comment: '少し慎重に過ごしたほうがよさそうです。落ち着いて行動しましょう。'
+    comment: '今日1日は少し慎重に過ごしたほうがよさそうです。落ち着いて行動しましょう。'
   },
   
   {
     name: '大凶',
-    comment: '今日は無理をしないことが一番です。ゆっくり過ごしましょう。'
+    comment: '今日は無理をしないことが一番です。今は我慢の時です。運気が戻るまで待ちましょう。'
   }
 ];
 
@@ -51,53 +64,89 @@ assessmentButton.addEventListener(
   () => {
 
     // 入力された名前を取得
-    const userName = userNameInput.value;
+    const userName = userNameInput.value.trim();
 
-    // 名前が入力されていなければ処理を終了
+    // 名前が入力されていない場合
     if (userName.length === 0) {
+
+      errorMessage.innerText =
+        '名前を入力してください。';
+
       return;
     }
 
-    // おみくじの結果を取得
-    const fortune = assessment(userName);
+    // エラーメッセージを消す
+    errorMessage.innerText = '';
 
 
-    // 診断結果エリアを空にする
+    // おみくじを引く
+    const fortune =
+      assessment(userName);
+
+
+    // 前の結果を消す
     resultDivision.innerText = '';
 
 
-    // 見出しを作成
-    const header = document.createElement('h3');
+    // 名前の表示
+    const resultTitle =
+      document.createElement('p');
 
-    header.innerText =
-      userName + 'さんの今日の運勢は「' +
-      fortune.name +
-      '」です！';
+    resultTitle.className =
+      'result-title';
 
-    resultDivision.appendChild(header);
+    resultTitle.innerText =
+      userName +
+      'さんの今日の運勢は';
+
+    resultDivision.appendChild(
+      resultTitle
+    );
+
+    // 運勢の表示
+    const fortuneName =
+      document.createElement('div');
+
+    fortuneName.className =
+      'fortune-name';
+
+    fortuneName.innerText =
+      fortune.name;
+
+    resultDivision.appendChild(
+      fortuneName
+    );
 
 
-    // コメントを作成
-    const paragraph = document.createElement('p');
+    // コメントの表示
+    const fortuneComment =
+      document.createElement('p');
 
-    paragraph.innerText = fortune.comment;
+    fortuneComment.className =
+      'fortune-comment';
 
-    resultDivision.appendChild(paragraph);
+    fortuneComment.innerText =
+      fortune.comment;
 
+    resultDivision.appendChild(
+      fortuneComment
+    );
 
     // X投稿エリアを空にする
     tweetDivision.innerText = '';
 
 
-    // X投稿用のリンクを作成
-    const anchor = document.createElement('a');
+    // X投稿リンクを作成
+    const anchor =
+      document.createElement('a');
+
 
     const tweetText =
-      userName +
-      'さんの今日のおみくじは「' +
+      '今日のおみくじは「' +
       fortune.name +
       '」でした！\n' +
       fortune.comment;
+
 
     const hrefValue =
       'https://twitter.com/intent/tweet?text=' +
@@ -105,28 +154,53 @@ assessmentButton.addEventListener(
       '&hashtags=' +
       encodeURIComponent('今日のおみくじ');
 
-    anchor.setAttribute('href', hrefValue);
-    anchor.setAttribute('target', '_blank');
+    anchor.setAttribute(
+      'href',
+      hrefValue
+    );
 
-    anchor.innerText = 'Xで結果を投稿する';
+    anchor.setAttribute(
+      'target',
+      '_blank'
+    );
 
-    tweetDivision.appendChild(anchor);
-  }
+    anchor.setAttribute(
+      'rel',
+      'noopener noreferrer'
+    );
+
+
+    anchor.innerText =
+      'Xで結果を投稿する';
+
+
+    tweetDivision.appendChild(
+      anchor
+    );
+
+    }
 );
 
 
-// 名前を受け取って、おみくじの結果を返す関数
+// 名前を受け取って
+// 今日のおみくじを返す関数
 function assessment(userName) {
 
   // 今日の日付を取得
   const today = new Date();
 
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const date = today.getDate();
+  const year =
+    today.getFullYear();
+
+  const month =
+    today.getMonth() + 1;
+
+  const date =
+    today.getDate();
 
 
-  // 名前と今日の日付を組み合わせて保存用の名前を作る
+  // 名前と今日の日付から
+  // 保存用の名前を作る
   const key =
     userName +
     '-' +
@@ -136,29 +210,41 @@ function assessment(userName) {
     '-' +
     date;
 
+  // 今日すでに引いた結果を確認
+  const savedResult =
+    localStorage.getItem(key);
 
-  // 今日すでにおみくじを引いているか確認する
-  const savedResult = localStorage.getItem(key);
 
-
-  // すでに今日のおみくじを引いていた場合
+  // 今日すでに引いている場合
   if (savedResult !== null) {
 
-    // 保存されていた結果を返す
-    return fortunes[Number(savedResult)];
+    return fortunes[
+      Number(savedResult)
+    ];
+
   }
 
-
-  // まだ引いていない場合は
   // 0～6の数字をランダムに作る
   const index =
-    Math.floor(Math.random() * fortunes.length);
+    Math.floor(
+      Math.random() *
+      fortunes.length
+    );
 
 
-  // 今日のおみくじの結果を保存する
-  localStorage.setItem(key, index);
+  // 今日の結果を保存する
+  localStorage.setItem(
+    key,
+    index
+  );
 
 
   // おみくじの結果を返す
   return fortunes[index];
 }
+
+    
+
+    
+   
+ 
