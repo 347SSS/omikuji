@@ -376,7 +376,7 @@ function playDaikyoEffect() {
     'daikyo-result'
   );
 
-  // 1.8秒後に演出を終了する
+  // 3秒後に演出を終了する
   setTimeout(
     () => {
 
@@ -389,7 +389,7 @@ function playDaikyoEffect() {
       );
 
     },
-    1800
+    3000
   );
 
 }
