@@ -139,10 +139,30 @@ button:hover {
 
   padding: 28px 28px 30px;
 
-  /* 和紙のような色むら */
-  background-color: #fffdf5;
+  background-color: #fffdf6;
 
+  /* 色むら + うっすら折れ線 */
   background-image:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      transparent 42%,
+      rgba(150, 120, 80, 0.05) 48%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(140, 110, 70, 0.05) 52%,
+      transparent 58%,
+      transparent 100%
+    ),
+    linear-gradient(
+      78deg,
+      transparent 0%,
+      transparent 68%,
+      rgba(150, 120, 80, 0.035) 73%,
+      rgba(255, 255, 255, 0.18) 76%,
+      rgba(140, 110, 70, 0.03) 78%,
+      transparent 82%,
+      transparent 100%
+    ),
     radial-gradient(
       circle at 20% 30%,
       rgba(120, 90, 50, 0.05) 0 1px,
@@ -160,20 +180,31 @@ button:hover {
     );
 
   background-size:
+    100% 100%,
+    100% 100%,
     18px 18px,
     25px 25px,
     100% 100%;
 
   border: 1px solid #e0cfad;
   border-top: 5px solid #c62828;
+  border-radius: 2px;
 
   box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.08);
+    0 8px 20px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(160, 130, 90, 0.20),
+    inset 12px 0 18px -18px rgba(120, 90, 50, 0.10),
+    inset -12px 0 18px -18px rgba(120, 90, 50, 0.08);
 
   overflow: hidden;
+
+  /* 少しだけ傾けて自然に */
+  transform: rotate(-0.4deg);
 }
 
-/* 紙の繊維 */
+
+/* 紙の繊維 + さらに薄いシワ */
 .fortune-paper::after {
   content: '';
 
@@ -199,16 +230,23 @@ button:hover {
       transparent 11px,
       rgba(120, 90, 50, 0.018) 12px,
       transparent 13px
+    ),
+    linear-gradient(
+      108deg,
+      transparent 0%,
+      transparent 46%,
+      rgba(130, 100, 60, 0.035) 49%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(130, 100, 60, 0.03) 51%,
+      transparent 54%,
+      transparent 100%
     );
+
+  opacity: 0.9;
 
   pointer-events: none;
 
   z-index: 0;
-}
-
-.fortune-paper > * {
-  position: relative;
-  z-index: 1;
 }
 
 
@@ -231,6 +269,10 @@ button:hover {
   letter-spacing: 0.5em;
 }
 
+.fortune-paper > * {
+  position: relative;
+  z-index: 1;
+}
 
 .result-title {
   margin: 0 0 10px;
