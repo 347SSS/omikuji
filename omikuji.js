@@ -208,7 +208,7 @@ assessmentButton.addEventListener(
         assessmentButton.disabled = false;
 
       },
-      900
+      1600
     );
 
   }
