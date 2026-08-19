@@ -11,13 +11,31 @@ h1 {
   color: #c62828;
 }
 
+.form-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#user-name {
+  width: 320px;
+  height: 56px;
+  font-size: 20px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
 button {
-  padding: 10px 30px;
+  height: 56px;
+  padding: 0 28px;
   background-color: #c62828;
   color: #ffffff;
   border-style: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -29,7 +47,8 @@ button:hover {
   margin-top: 30px;
 }
 
-#result-area h2 {
+#result-area h2,
+#result-area h3 {
   color: #c62828;
 }
 
