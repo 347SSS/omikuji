@@ -65,55 +65,103 @@ assessmentButton.addEventListener(
   () => {
 
     // 入力された名前を取得
-    const userName = userNameInput.value.trim();
+    const userName =
+      userNameInput.value.trim();
+
 
     // 名前が入力されていない場合
     if (userName.length === 0) {
+
       errorMessage.innerText =
         '名前を入力してください。';
 
       return;
     }
 
+
     // エラーメッセージを消す
     errorMessage.innerText = '';
 
-    // 前のおみくじ結果を消す
+
+    // 先に今日のおみくじ結果を決める
+    const fortune =
+      assessment(userName);
+
+
+    // 前の結果を消す
     resultDivision.innerText = '';
     tweetDivision.innerText = '';
 
-    // 前回の結果表示アニメーションを消す
-    resultDivision.classList.remove('result-show');
+    resultDivision.classList.remove(
+      'result-show'
+    );
 
-    // おみくじ箱を表示する
-    omikujiAnimation.classList.add('active');
 
-    // 揺れアニメーションを最初から再生する
-    omikujiAnimation.classList.remove('shake');
+    // 前回の凶アニメーションを消す
+    omikujiAnimation.classList.remove(
+      'bad-luck'
+    );
+
+
+    // 凶または大凶の場合
+    if (
+      fortune.name === '凶' ||
+      fortune.name === '大凶'
+    ) {
+
+      omikujiAnimation.classList.add(
+        'bad-luck'
+      );
+
+    }
+
+
+    // おみくじ箱を表示
+    omikujiAnimation.classList.add(
+      'active'
+    );
+
+
+    // アニメーションを再スタート
+    omikujiAnimation.classList.remove(
+      'shake'
+    );
 
     void omikujiAnimation.offsetWidth;
 
-    omikujiAnimation.classList.add('shake');
+    omikujiAnimation.classList.add(
+      'shake'
+    );
 
-    // アニメーション中はボタンを押せなくする
+
+    // 連打防止
     assessmentButton.disabled = true;
 
 
-    // 0.9秒後に結果を表示する
+    // 1.6秒後に結果を表示
     setTimeout(
       () => {
 
         // おみくじ箱を消す
         omikujiAnimation.classList.remove(
           'active',
-          'shake'
+          'shake',
+          'bad-luck'
         );
 
-        // おみくじを引く
-        const fortune = assessment(userName);
+
+        /* ==============================
+           おみくじ紙を作る
+        ============================== */
+
+        const fortunePaper =
+          document.createElement('div');
+
+        fortunePaper.className =
+          'fortune-paper';
 
 
-        // 名前の表示
+        // 名前
         const resultTitle =
           document.createElement('p');
 
@@ -124,12 +172,12 @@ assessmentButton.addEventListener(
           userName +
           'さんの今日の運勢は';
 
-        resultDivision.appendChild(
+        fortunePaper.appendChild(
           resultTitle
         );
 
 
-        // 運勢の表示
+        // 運勢
         const fortuneName =
           document.createElement('div');
 
@@ -139,12 +187,12 @@ assessmentButton.addEventListener(
         fortuneName.innerText =
           fortune.name;
 
-        resultDivision.appendChild(
+        fortunePaper.appendChild(
           fortuneName
         );
 
 
-        // コメントの表示
+        // コメント
         const fortuneComment =
           document.createElement('p');
 
@@ -154,20 +202,43 @@ assessmentButton.addEventListener(
         fortuneComment.innerText =
           fortune.comment;
 
-        resultDivision.appendChild(
+        fortunePaper.appendChild(
           fortuneComment
         );
 
 
-        // 結果をふわっと表示する
+        // おみくじ紙を画面へ追加
+        resultDivision.appendChild(
+          fortunePaper
+        );
+
+
+        /* ==============================
+           大吉だけキラキラ
+        ============================== */
+
+        if (fortune.name === '大吉') {
+
+          createSparkles();
+
+        }
+
+
+        // 結果表示アニメーション
+        void resultDivision.offsetWidth;
+
         resultDivision.classList.add(
           'result-show'
         );
 
 
-        // X投稿リンクを作成
+        /* ==============================
+           X投稿
+        ============================== */
+
         const anchor =
           document.createElement('a');
+
 
         const tweetText =
           '今日のおみくじは「' +
@@ -175,11 +246,13 @@ assessmentButton.addEventListener(
           '」でした！\n' +
           fortune.comment;
 
+
         const hrefValue =
           'https://twitter.com/intent/tweet?text=' +
           encodeURIComponent(tweetText) +
           '&hashtags=' +
           encodeURIComponent('今日のおみくじ');
+
 
         anchor.setAttribute(
           'href',
@@ -196,24 +269,47 @@ assessmentButton.addEventListener(
           'noopener noreferrer'
         );
 
+
         anchor.innerText =
           'Xで結果を投稿する';
+
 
         tweetDivision.appendChild(
           anchor
         );
 
 
-        // 再びボタンを押せるようにする
+        // ボタンを再び有効にする
         assessmentButton.disabled = false;
 
       },
+
       1600
     );
 
   }
 );
 
+// 大吉のキラキラを作る関数
+function createSparkles() {
+
+  for (let i = 1; i <= 8; i++) {
+
+    const sparkle =
+      document.createElement('span');
+
+    sparkle.className =
+      'sparkle sparkle-' + i;
+
+    sparkle.innerText = '✦';
+
+    resultDivision.appendChild(
+      sparkle
+    );
+
+  }
+
+}
 
 // 名前を受け取って
 // 今日のおみくじを返す関数
