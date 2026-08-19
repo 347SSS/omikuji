@@ -223,6 +223,13 @@ assessmentButton.addEventListener(
 
         }
 
+        // 大凶の場合は暗い演出
+        if (fortune.name === '大凶') {
+
+          playDaikyoEffect();
+
+        }
+
 
         // 結果表示アニメーション
         void resultDivision.offsetWidth;
@@ -293,21 +300,97 @@ assessmentButton.addEventListener(
 // 大吉のキラキラを作る関数
 function createSparkles() {
 
-  for (let i = 1; i <= 8; i++) {
+  const symbols = [
+    '✦',
+    '✧',
+    '★',
+    '✶'
+  ];
+
+  // 24個のキラキラを作る
+  for (let i = 0; i < 24; i++) {
 
     const sparkle =
       document.createElement('span');
 
-    sparkle.className =
-      'sparkle sparkle-' + i;
+    sparkle.className = 'sparkle';
 
-    sparkle.innerText = '✦';
+    // 星の形をランダムにする
+    sparkle.innerText =
+      symbols[
+        Math.floor(
+          Math.random() * symbols.length
+        )
+      ];
+
+    // 横の位置をランダムにする
+    sparkle.style.left =
+      (-10 + Math.random() * 120) + '%';
+
+    // 縦の位置をランダムにする
+    sparkle.style.top =
+      (-10 + Math.random() * 110) + '%';
+
+    // 星の大きさをランダムにする
+    sparkle.style.fontSize =
+      (24 + Math.random() * 32) + 'px';
+
+    // 出るタイミングを少しずつ変える
+    sparkle.style.animationDelay =
+      (Math.random() * 0.5) + 's';
+
+    // アニメーション時間も少し変える
+    sparkle.style.animationDuration =
+      (1.2 + Math.random() * 0.8) + 's';
 
     resultDivision.appendChild(
       sparkle
     );
 
   }
+
+}
+
+// 大凶の暗い演出を行う関数
+function playDaikyoEffect() {
+
+  // 前回の演出を消す
+  document.body.classList.remove(
+    'daikyo-mode'
+  );
+
+  resultDivision.classList.remove(
+    'daikyo-result'
+  );
+
+  // アニメーションを最初から再生する
+  void document.body.offsetWidth;
+
+  // 画面を暗くする
+  document.body.classList.add(
+    'daikyo-mode'
+  );
+
+  // 「大凶」の文字を揺らす
+  resultDivision.classList.add(
+    'daikyo-result'
+  );
+
+  // 1.8秒後に演出を終了する
+  setTimeout(
+    () => {
+
+      document.body.classList.remove(
+        'daikyo-mode'
+      );
+
+      resultDivision.classList.remove(
+        'daikyo-result'
+      );
+
+    },
+    1800
+  );
 
 }
 
