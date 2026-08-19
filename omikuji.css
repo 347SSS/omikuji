@@ -186,6 +186,117 @@ button:hover {
   opacity: 0.8;
 }
 
+/* おみくじアニメーション */
+
+#omikuji-animation {
+  display: none;
+  margin-top: 25px;
+}
+
+
+/* おみくじ箱 */
+.omikuji-draw-box {
+  width: 90px;
+  height: 120px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #c62828;
+  color: #ffffff;
+
+  border-radius: 10px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/* アニメーション中だけ表示 */
+#omikuji-animation.active {
+  display: block;
+}
+
+
+/* 箱を揺らす */
+#omikuji-animation.shake .omikuji-draw-box {
+  animation: omikuji-shake 0.9s ease-in-out;
+}
+
+
+/* おみくじ箱の動き */
+@keyframes omikuji-shake {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(-8deg) translateY(-3px);
+  }
+
+  20% {
+    transform: rotate(8deg);
+  }
+
+  30% {
+    transform: rotate(-8deg) translateY(-3px);
+  }
+
+  40% {
+    transform: rotate(8deg);
+  }
+
+  50% {
+    transform: rotate(-8deg) translateY(-3px);
+  }
+
+  60% {
+    transform: rotate(8deg);
+  }
+
+  70% {
+    transform: rotate(-6deg);
+  }
+
+  80% {
+    transform: rotate(6deg);
+  }
+
+  90% {
+    transform: rotate(-3deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+/* 結果がふわっと出る */
+#result-area.result-show {
+  animation: result-fade 0.6s ease-out;
+}
+
+
+@keyframes result-fade {
+
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* スマートフォン用 */
 @media (max-width: 600px) {
