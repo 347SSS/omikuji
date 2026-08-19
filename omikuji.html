@@ -8,14 +8,34 @@
 </head>
 
 <body>
-  <h1>今日のおみくじ</h1>
-  <p>今日の運勢を占ってみましょう！</p>
-  <p>名前を入力してください</p>
+  <main class="omikuji-box">
+    <h1>今日のおみくじ</h1>
+    
+    <p id="today"></p>
+     <p class="lead">
+      今日の運勢を占ってみよう！
+    </p>
 
-  <div class="form-area">
-  <input type="text" id="user-name" size="30" maxlength="20">
-  <button id="assessment">おみくじを引く</button>
-</div>
+     <div class="form-area">
+
+      <label for="user-name">
+        名前を入力してください
+      </label>
+
+     <input
+        type="text"
+        id="user-name"
+        maxlength="20"
+        placeholder="例：田中太郎"
+      >
+
+        <button id="assessment">
+        おみくじを引く
+      </button>
+
+    </div>
+    
+   <p id="error-message"></p>
 
   <div id="result-area"></div>
   <div id="tweet-area"></div>
