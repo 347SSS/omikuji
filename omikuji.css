@@ -139,18 +139,38 @@ button:hover {
 
   padding: 28px 28px 30px;
 
-  background:
+  /* 和紙のような色むら */
+  background-color: #fffdf5;
+
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(120, 90, 50, 0.05) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(120, 90, 50, 0.04) 0 1px,
+      transparent 1.5px
+    ),
     linear-gradient(
       180deg,
       #fffef8,
-      #fff9e8
+      #fff8e8
     );
 
-  border: 1px solid #e5d5b5;
+  background-size:
+    18px 18px,
+    25px 25px,
+    100% 100%;
+
+  border: 1px solid #e0cfad;
   border-top: 5px solid #c62828;
 
   box-shadow:
     0 6px 18px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
 }
 
 
