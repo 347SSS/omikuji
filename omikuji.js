@@ -291,7 +291,7 @@ assessmentButton.addEventListener(
 
       },
 
-      1600
+      2400
     );
 
   }
