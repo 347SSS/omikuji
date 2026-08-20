@@ -209,8 +209,7 @@ button:hover {
   background-position: center;
   background-repeat: no-repeat;
 
-  /* テクスチャを薄く重ねる */
-  opacity: 0.28;
+  opacity: 0.25;
 
   mix-blend-mode: multiply;
 
