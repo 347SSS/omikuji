@@ -361,6 +361,74 @@ button:hover {
   margin: 0 auto;
 }
 
+/* 箱全体を振ってから逆さにする */
+#omikuji-animation.active .omikuji-stage {
+  animation:
+    stage-draw 1.75s ease-in-out forwards;
+
+  transform-origin: center center;
+}
+
+@keyframes stage-draw {
+
+  /* 最初は通常の向き */
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  /* 上下に振る */
+  12% {
+    transform:
+      translateY(-10px)
+      rotate(-5deg);
+  }
+
+  24% {
+    transform:
+      translateY(5px)
+      rotate(5deg);
+  }
+
+  36% {
+    transform:
+      translateY(-10px)
+      rotate(-6deg);
+  }
+
+  48% {
+    transform:
+      translateY(4px)
+      rotate(6deg);
+  }
+
+  60% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  /* ここからひっくり返す */
+  72% {
+    transform:
+      translateY(0)
+      rotate(60deg);
+  }
+
+  86% {
+    transform:
+      translateY(0)
+      rotate(140deg);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(180deg);
+  }
+}
+
 
 /* おみくじ箱 */
 .omikuji-image {
@@ -381,8 +449,7 @@ button:hover {
 /* 登場時 */
 #omikuji-animation.active .omikuji-image {
   animation:
-    box-appear 0.25s ease-out,
-    omikuji-shake 0.9s 0.25s ease-in-out;
+    box-appear 0.25s ease-out;
 }
 
 /* 凶・大凶だけ最後にガタッとする */
@@ -581,7 +648,7 @@ button:hover {
 
 /* 棒が飛び出す */
 #omikuji-animation.active .omikuji-stick {
-  animation: stick-out 0.45s 1.05s ease-out forwards;
+  animation: stick-out 0.45s 1.8s ease-out forwards;
 }
 
 
