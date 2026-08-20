@@ -181,8 +181,8 @@ button:hover {
 
   border-top: 5px solid #c62828;
 
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.12);
+  filter:
+  drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12));
 
   overflow: hidden;
 
