@@ -180,8 +180,6 @@ button:hover {
     0 94%
   );
 
-  border-top: 5px solid #c62828;
-
   filter:
   drop-shadow(0 8px 10px rgba(0, 0, 0, 0.12));
 
@@ -210,7 +208,7 @@ button:hover {
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: 0.55;
+  opacity: 0.75;
 
   mix-blend-mode: multiply;
 
@@ -221,13 +219,54 @@ button:hover {
 
 
 /* 紙の上に「おみくじ」と表示 */
+/* 上部の赤い波打ったライン */
+
 .fortune-paper::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 11px;
+
+  background-color: #c62828;
+
+  /* 赤いラインの下側も少し波打たせる */
+  clip-path: polygon(
+    0 0,
+    100% 0,
+
+    100% 55%,
+    92% 68%,
+    84% 58%,
+    76% 75%,
+    68% 62%,
+    60% 78%,
+    52% 64%,
+    44% 74%,
+    36% 60%,
+    28% 76%,
+    20% 63%,
+    12% 72%,
+    5% 60%,
+    0 70%
+  );
+
+  z-index: 2;
+}
+
+.fortune-paper > * {
+  position: relative;
+  z-index: 1;
+}
+
+.result-title::before {
   content: 'おみくじ';
 
   display: block;
-
-  position: relative;
-  z-index: 1;
 
   margin-bottom: 18px;
 
@@ -237,11 +276,6 @@ button:hover {
   font-weight: bold;
 
   letter-spacing: 0.5em;
-}
-
-.fortune-paper > * {
-  position: relative;
-  z-index: 1;
 }
 
 .result-title {
